@@ -156,7 +156,7 @@ if __name__ == '__main__':
 
         if in_fpath.suffix.lower() == ".mp3" and args.no_mp3_support:
             print("Can't Use mp3 files please try again:")
-            continue
+#         continue
         ## Computing the embedding
         # First, we load the wav using the function that the speaker encoder provides. This is 
         # important: there is preprocessing that must be applied.
