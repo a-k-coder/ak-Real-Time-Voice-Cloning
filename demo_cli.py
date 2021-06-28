@@ -224,6 +224,7 @@ if __name__ == '__main__':
         generated_wav = encoder.preprocess_wav(generated_wav)
 
         # Play the audio (non-blocking)
+        print("args.no_sound: ", args.no_sound)
         if not args.no_sound:
             try:
                 sd.stop()
@@ -241,7 +242,7 @@ if __name__ == '__main__':
         # ts store timestamp of current time
 #         ts = ct.timestamp()
         ct = datetime.now()
-        dt_string = ct.strftime("%d-%m-%Y-%H-%M-%S")
+        dt_string = ct.strftime("%d-%m-%Y_%H-%M-%S_")
         
         filename = dt_string+in_fname+".wav"
     
