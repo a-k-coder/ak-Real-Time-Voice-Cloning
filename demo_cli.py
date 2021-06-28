@@ -241,9 +241,9 @@ if __name__ == '__main__':
         # ts store timestamp of current time
 #         ts = ct.timestamp()
         ct = datetime.now()
-        dt_string = ct.strftime("%d-/%m-/%Y-%H-%M-%S")
+        dt_string = ct.strftime("%d-%m-%Y-%H-%M-%S")
         
-        filename = dt_string+in_fname
+        filename = dt_string+in_fname+".wav"
     
         print(generated_wav.dtype)
         sf.write(filename, generated_wav.astype(np.float32), synthesizer.sample_rate)
