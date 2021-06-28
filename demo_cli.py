@@ -13,6 +13,7 @@ import torch
 import sys
 import os
 from audioread.exceptions import NoBackendError
+from datetime import datetime
 
 if __name__ == '__main__':
     ## Info & args
@@ -153,7 +154,9 @@ if __name__ == '__main__':
             in_fpath = Path((args.path).replace("\"", "").replace("\'", ""))
         else:
             in_fpath = Path(input(message).replace("\"", "").replace("\'", ""))
-
+        
+        in_fname = in_fpath.stem
+        
         if in_fpath.suffix.lower() == ".mp3" and args.no_mp3_support:
             print("Can't Use mp3 files please try again:")
 #         continue
@@ -232,7 +235,16 @@ if __name__ == '__main__':
                 raise
 
         # Save it on the disk
-        filename = "demo_output_%02d.wav" % num_generated
+#         filename = "demo_output_%02d.wav" % num_generated
+        
+        
+        # ts store timestamp of current time
+#         ts = ct.timestamp()
+        ct = datetime.now()
+        dt_string = ct.strftime("%d-/%m-/%Y-%H-%M-%S")
+        
+        filename = dt_string+in_fname
+    
         print(generated_wav.dtype)
         sf.write(filename, generated_wav.astype(np.float32), synthesizer.sample_rate)
         num_generated += 1
