@@ -150,7 +150,7 @@ if __name__ == '__main__':
 #             in_fpath = Path(input(message).replace("\"", "").replace("\'", ""))
 #             Take path as argument
             if os.path.exists(args.path):
-                in_fpath = args.path
+                in_fpath = Path((args.path).replace("\"", "").replace("\'", ""))
             else:
                 in_fpath = Path(input(message).replace("\"", "").replace("\'", ""))
                 
