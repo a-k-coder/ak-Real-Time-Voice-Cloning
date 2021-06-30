@@ -15,7 +15,8 @@ import os
 from audioread.exceptions import NoBackendError
 from datetime import datetime
 
-if __name__ == '__main__':
+# if __name__ == '__main__':
+def voicecloner(arg_path, arg_text):   
     ## Info & args
     parser = argparse.ArgumentParser(
         formatter_class=argparse.ArgumentDefaultsHelpFormatter
@@ -41,8 +42,8 @@ if __name__ == '__main__':
     #
     # Add arguments for path to reference voice file and text to be cloned.
     #
-    parser.add_argument("--path", default='', help="Reference voice: enter an audio filepath of a voice to be cloned (mp3, wav, m4a, flac, ...):\n")
-    parser.add_argument("--text", default='', help="Write a sentence (+-20 words) to be synthesized:\n")
+    parser.add_argument("--path", default=arg_path, help="Reference voice: enter an audio filepath of a voice to be cloned (mp3, wav, m4a, flac, ...):\n")
+    parser.add_argument("--text", default=arg_text, help="Write a sentence (+-20 words) to be synthesized:\n")
     #
     args = parser.parse_args()
     print_args(args, parser)
