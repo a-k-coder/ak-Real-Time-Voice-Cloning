@@ -18,43 +18,51 @@ from datetime import datetime
 # if __name__ == '__main__':
 def voicecloner(arg_path, arg_text):   
     ## Info & args
-    parser = argparse.ArgumentParser(
-        formatter_class=argparse.ArgumentDefaultsHelpFormatter
-    )
-    parser.add_argument("-e", "--enc_model_fpath", type=Path, 
-                        default="encoder/saved_models/pretrained.pt",
-                        help="Path to a saved encoder")
-    parser.add_argument("-s", "--syn_model_fpath", type=Path, 
-                        default="synthesizer/saved_models/pretrained/pretrained.pt",
-                        help="Path to a saved synthesizer")
-    parser.add_argument("-v", "--voc_model_fpath", type=Path, 
-                        default="vocoder/saved_models/pretrained/pretrained.pt",
-                        help="Path to a saved vocoder")
-    parser.add_argument("--cpu", action="store_true", help=\
-        "If True, processing is done on CPU, even when a GPU is available.")
-    parser.add_argument("--no_sound", action="store_true", help=\
-        "If True, audio won't be played.")
-    parser.add_argument("--seed", type=int, default=None, help=\
-        "Optional random number seed value to make toolbox deterministic.")
-    parser.add_argument("--no_mp3_support", action="store_true", help=\
-        "If True, disallows loading mp3 files to prevent audioread errors when ffmpeg is not installed.")
-    
+#     parser = argparse.ArgumentParser(
+#         formatter_class=argparse.ArgumentDefaultsHelpFormatter
+#     )
+#     parser.add_argument("-e", "--enc_model_fpath", type=Path, 
+#                         default="encoder/saved_models/pretrained.pt",
+#                         help="Path to a saved encoder")
+    args_enc_model_fpath = "encoder/saved_models/pretrained.pt"
+#     parser.add_argument("-s", "--syn_model_fpath", type=Path, 
+#                         default="synthesizer/saved_models/pretrained/pretrained.pt",
+#                         help="Path to a saved synthesizer")
+    args_syn_model_fpath = "synthesizer/saved_models/pretrained/pretrained.pt"
+#     parser.add_argument("-v", "--voc_model_fpath", type=Path, 
+#                         default="vocoder/saved_models/pretrained/pretrained.pt",
+#                         help="Path to a saved vocoder")
+    args_voc_model_fpath = "vocoder/saved_models/pretrained/pretrained.pt"
+#     parser.add_argument("--cpu", action="store_true", help=\
+#         "If True, processing is done on CPU, even when a GPU is available.")
+    args_cpu = False
+#     parser.add_argument("--no_sound", action="store_true", help=\
+#         "If True, audio won't be played.")
+    args_no_sound = False
+#     parser.add_argument("--seed", type=int, default=None, help=\
+#         "Optional random number seed value to make toolbox deterministic.")
+    args_seed = None
+#     parser.add_argument("--no_mp3_support", action="store_true", help=\
+#         "If True, disallows loading mp3 files to prevent audioread errors when ffmpeg is not installed.")
+    args_no_mp3_support = False
     #
     # Add arguments for path to reference voice file and text to be cloned.
     #
-    parser.add_argument("--path", default=arg_path, help="Reference voice: enter an audio filepath of a voice to be cloned (mp3, wav, m4a, flac, ...):\n")
-    parser.add_argument("--text", default=arg_text, help="Write a sentence (+-20 words) to be synthesized:\n")
+#     parser.add_argument("--path", default=arg_path, help="Reference voice: enter an audio filepath of a voice to be cloned (mp3, wav, m4a, flac, ...):\n")
+#     parser.add_argument("--text", default=arg_text, help="Write a sentence (+-20 words) to be synthesized:\n")
+    args_path = arg_path
+    args_text = arg_text
     #
-    args = parser.parse_args()
-    print_args(args, parser)
-    if not args.no_sound:
+#     args = parser.parse_args()
+#     print_args(args, parser)
+    if not args_no_sound:
         import sounddevice as sd
 
-    if args.cpu:
+    if args_cpu:
         # Hide GPUs from Pytorch to force CPU processing
         os.environ["CUDA_VISIBLE_DEVICES"] = ""
 
-    if not args.no_mp3_support:
+    if not args_no_mp3_support:
         try:
             librosa.load("samples/1320_00000.mp3")
         except NoBackendError:
@@ -80,15 +88,15 @@ def voicecloner(arg_path, arg_text):
         print("Using CPU for inference.\n")
     
     ## Remind the user to download pretrained models if needed
-    check_model_paths(encoder_path=args.enc_model_fpath,
-                      synthesizer_path=args.syn_model_fpath,
-                      vocoder_path=args.voc_model_fpath)
+    check_model_paths(encoder_path=args_enc_model_fpath,
+                      synthesizer_path=args_syn_model_fpath,
+                      vocoder_path=args_voc_model_fpath)
     
     ## Load the models one by one.
     print("Preparing the encoder, the synthesizer and the vocoder...")
-    encoder.load_model(args.enc_model_fpath)
-    synthesizer = Synthesizer(args.syn_model_fpath)
-    vocoder.load_model(args.voc_model_fpath)
+    encoder.load_model(args_enc_model_fpath)
+    synthesizer = Synthesizer(args_syn_model_fpath)
+    vocoder.load_model(args_voc_model_fpath)
     
     
     ## Run a test
@@ -151,14 +159,14 @@ def voicecloner(arg_path, arg_text):
 #             Uncomment next line to take path as input on console
 #             in_fpath = Path(input(message).replace("\"", "").replace("\'", ""))
 #             Take path as argument
-        if os.path.exists(args.path):
-            in_fpath = Path((args.path).replace("\"", "").replace("\'", ""))
+        if os.path.exists(args_path):
+            in_fpath = Path((args_path).replace("\"", "").replace("\'", ""))
         else:
             in_fpath = Path(input(message).replace("\"", "").replace("\'", ""))
         
         in_fname = in_fpath.stem
         
-        if in_fpath.suffix.lower() == ".mp3" and args.no_mp3_support:
+        if in_fpath.suffix.lower() == ".mp3" and args_no_mp3_support:
             print("Can't Use mp3 files please try again:")
 #         continue
         ## Computing the embedding
@@ -183,15 +191,15 @@ def voicecloner(arg_path, arg_text):
         ## Generating the spectrogram
 #             text = input("Write a sentence (+-20 words) to be synthesized:\n")
 #           Take text input as an argument
-        if args.text != '':
-            text = args.text
+        if args_text != '':
+            text = args_text
         else:
             text = input("Write a sentence (+-20 words) to be synthesized:\n")
 
         # If seed is specified, reset torch seed and force synthesizer reload
-        if args.seed is not None:
-            torch.manual_seed(args.seed)
-            synthesizer = Synthesizer(args.syn_model_fpath)
+        if args_seed is not None:
+            torch.manual_seed(args_seed)
+            synthesizer = Synthesizer(args_syn_model_fpath)
 
         # The synthesizer works in batch, so you need to put your data in a list or numpy array
         texts = [text]
@@ -207,9 +215,9 @@ def voicecloner(arg_path, arg_text):
         print("Synthesizing the waveform:")
 
         # If seed is specified, reset torch seed and reload vocoder
-        if args.seed is not None:
-            torch.manual_seed(args.seed)
-            vocoder.load_model(args.voc_model_fpath)
+        if args_seed is not None:
+            torch.manual_seed(args_seed)
+            vocoder.load_model(args_voc_model_fpath)
 
         # Synthesizing the waveform is fairly straightforward. Remember that the longer the
         # spectrogram, the more time-efficient the vocoder.
@@ -225,8 +233,8 @@ def voicecloner(arg_path, arg_text):
         generated_wav = encoder.preprocess_wav(generated_wav)
 
         # Play the audio (non-blocking)
-        print("args.no_sound: ", args.no_sound)
-        if not args.no_sound:
+        print("args_no_sound: ", args_no_sound)
+        if not args_no_sound:
             try:
                 sd.stop()
                 sd.play(generated_wav, synthesizer.sample_rate)
