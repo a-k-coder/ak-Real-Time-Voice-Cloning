@@ -262,9 +262,10 @@ def voicecloner(arg_path, arg_text):
         print("\nSaved output as %s\n\n" % filename)
         
         output_pathstr = 'C:\\Users\\Aruna\\Desktop\\Springboard\\Capstone\\Real-Time-Voice-Cloning-master\\' + filename 
-        print(output_pathstr)
+#         print(output_pathstr)
         
-        return output_pathstr
+#         return output_pathstr
+        return filename
 
 
     except Exception as e:
