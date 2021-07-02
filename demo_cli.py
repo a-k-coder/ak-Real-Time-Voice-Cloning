@@ -39,7 +39,8 @@ def voicecloner(arg_path, arg_text):
     args_cpu = False
 #     parser.add_argument("--no_sound", action="store_true", help=\
 #         "If True, audio won't be played.")
-    args_no_sound = False
+#     args_no_sound = False # default
+    args_no_sound = True
 #     parser.add_argument("--seed", type=int, default=None, help=\
 #         "Optional random number seed value to make toolbox deterministic.")
     args_seed = None
@@ -261,7 +262,7 @@ def voicecloner(arg_path, arg_text):
         num_generated += 1
         print("\nSaved output as %s\n\n" % filename)
         
-        output_pathstr = 'C:\\Users\\Aruna\\Desktop\\Springboard\\Capstone\\Real-Time-Voice-Cloning-master\\' + filename 
+#         output_pathstr = 'C:\\Users\\Aruna\\Desktop\\Springboard\\Capstone\\Real-Time-Voice-Cloning-master\\' + filename 
 #         print(output_pathstr)
         
 #         return output_pathstr
