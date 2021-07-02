@@ -260,6 +260,10 @@ def voicecloner(arg_path, arg_text):
         sf.write(filename, generated_wav.astype(np.float32), synthesizer.sample_rate)
         num_generated += 1
         print("\nSaved output as %s\n\n" % filename)
+        
+#         output_dir = 'C:\\Users\\Aruna\\Desktop\\Springboard\\Capstone\\Real-Time-Voice-Cloning-master'
+        
+        return filename
 
 
     except Exception as e:
