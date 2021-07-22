@@ -56,7 +56,7 @@ def voicecloner(arg_path, arg_text):
     #
 #     parser.add_argument("--path", default=arg_path, help="Reference voice: enter an audio filepath of a voice to be cloned (mp3, wav, m4a, flac, ...):\n")
 #     parser.add_argument("--text", default=arg_text, help="Write a sentence (+-20 words) to be synthesized:\n")
-    args_path = arg_path
+    args_path = '..//'+arg_path
     args_text = arg_text
     #
 #     args = parser.parse_args()
