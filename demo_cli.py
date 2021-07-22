@@ -17,7 +17,8 @@ from datetime import datetime
 
 # if __name__ == '__main__':
 def voicecloner(arg_path, arg_text):   
-    os.chdir('C:\\Users\\Aruna\\Desktop\\Springboard\\Capstone\\Real-Time-Voice-Cloning-master')
+#     os.chdir('C:\\Users\\Aruna\\Desktop\\Springboard\\Capstone\\Real-Time-Voice-Cloning-master')
+    os.chdir('.\\Real-Time-Voice-Cloning-master')
     ## Info & args
 #     parser = argparse.ArgumentParser(
 #         formatter_class=argparse.ArgumentDefaultsHelpFormatter
