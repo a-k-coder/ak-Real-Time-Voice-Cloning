@@ -19,6 +19,7 @@ from datetime import datetime
 def voicecloner(arg_path, arg_text):   
 #     os.chdir('C:\\Users\\Aruna\\Desktop\\Springboard\\Capstone\\Real-Time-Voice-Cloning-master')
     print('Inside demo_cli.py')
+    print("CWD: ", os.getcwd())
     os.chdir('.\\Real-Time-Voice-Cloning-master')
     print(os.getcwd())
     ## Info & args
