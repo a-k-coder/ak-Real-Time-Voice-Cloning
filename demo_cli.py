@@ -17,7 +17,6 @@ from datetime import datetime
 
 # if __name__ == '__main__':
 def voicecloner(arg_path, arg_text):   
-#     os.chdir('C:\\Users\\Aruna\\Desktop\\Springboard\\Capstone\\Real-Time-Voice-Cloning-master')
     print('Inside demo_cli.py')
     print("CWD: ", os.getcwd())
     os.chdir('.\\ak-Real-Time-Voice-Cloning')
@@ -266,10 +265,6 @@ def voicecloner(arg_path, arg_text):
         num_generated += 1
         print("\nSaved output as %s\n\n" % filename)
         
-#         output_pathstr = 'C:\\Users\\Aruna\\Desktop\\Springboard\\Capstone\\Real-Time-Voice-Cloning-master\\' + filename 
-#         print(output_pathstr)
-        
-#         return output_pathstr
         return filename
 
 
