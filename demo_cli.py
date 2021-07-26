@@ -19,7 +19,7 @@ from datetime import datetime
 def voicecloner(arg_path, arg_text):   
     print('Inside demo_cli.py')
     print("CWD: ", os.getcwd())
-    os.chdir(Path(('./ak-Real-Time-Voice-Cloning').replace("\"","").replace("\'","")))
+    os.chdir(Path((os.getcwd()+'/ak-Real-Time-Voice-Cloning').replace("\"","").replace("\'","")))
     print(os.getcwd())
     ## Info & args
 #     parser = argparse.ArgumentParser(
