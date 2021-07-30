@@ -264,6 +264,19 @@ def voicecloner(arg_path, arg_text):
         dt_string = ct.strftime("%d-%m-%Y_%H-%M-%S_")
         
         filename = dt_string+in_fname+".wav"
+        # include path where file is to be stored
+        current_cwd = os.getcwd()
+        print("CWD: ", current_cwd)
+        parent_dir = os.path.dirname(current_cwd)
+        grandparent_dir = os.path.dirname(parent_dir)
+        print("parent_dir: ", parent_dir)
+        print("grandparent_dir: ", grandparent_dir)
+        filepath = Path((grandparent_dir + '/ui/src/resources/output').replace("\'","").replace("\"",""))
+        print("directory path: ", filepath)
+        print("type(filepath): ", filepath)
+        filename = os.path.join(filepath, filename)
+        print("file path: ", filename)
+        
     
         print(generated_wav.dtype)
         sf.write(filename, generated_wav.astype(np.float32), synthesizer.sample_rate)
