@@ -49,14 +49,16 @@ def voicecloner(arg_path, arg_text):
     args_seed = None
 #     parser.add_argument("--no_mp3_support", action="store_true", help=\
 #         "If True, disallows loading mp3 files to prevent audioread errors when ffmpeg is not installed.")
-    args_no_mp3_support = False
+    args_no_mp3_support = True
     #
     # Add arguments for path to reference voice file and text to be cloned.
     #
 #     parser.add_argument("--path", default=arg_path, help="Reference voice: enter an audio filepath of a voice to be cloned (mp3, wav, m4a, flac, ...):\n")
 #     parser.add_argument("--text", default=arg_text, help="Write a sentence (+-20 words) to be synthesized:\n")
-    args_path = '..//'+arg_path
+    args_path = arg_path
     args_text = arg_text
+    print("args_path: ", args_path)
+    print("args_text: ", args_text)
     #
 #     args = parser.parse_args()
 #     print_args(args, parser)
@@ -93,6 +95,9 @@ def voicecloner(arg_path, arg_text):
         print("Using CPU for inference.\n")
     
     ## Remind the user to download pretrained models if needed
+    print("args_enc_model_fpath: ", args_enc_model_fpath)
+    print("args_syn_model_fpath: ", args_syn_model_fpath)
+    print("args_voc_model_fpath: ", args_voc_model_fpath)
     check_model_paths(encoder_path=args_enc_model_fpath,
                       synthesizer_path=args_syn_model_fpath,
                       vocoder_path=args_voc_model_fpath)
