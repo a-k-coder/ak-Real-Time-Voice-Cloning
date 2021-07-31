@@ -274,12 +274,12 @@ def voicecloner(arg_path, arg_text):
         filepath = Path((grandparent_dir + '/ui/src/resources/output').replace("\'","").replace("\"",""))
         print("directory path: ", filepath)
         print("type(filepath): ", filepath)
-        filename = os.path.join(filepath, filename)
-        print("file path: ", filename)
+        filepath = os.path.join(filepath, filename)
+        print("file path: ", filepath)
         
     
         print(generated_wav.dtype)
-        sf.write(filename, generated_wav.astype(np.float32), synthesizer.sample_rate)
+        sf.write(filepath, generated_wav.astype(np.float32), synthesizer.sample_rate)
         num_generated += 1
         print("\nSaved output as %s\n\n" % filename)
         
