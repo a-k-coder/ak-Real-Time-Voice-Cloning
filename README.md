@@ -1,1 +1,1 @@
-This is a modification of Corentin J's Real Time Voice Cloning [repo](https://github.com/CorentinJ/Real-Time-Voice-Cloning) to interface with the [Voice Cloner React Flask app](https://github.com/a-k-coder/Voice-Cloner-React-Flask-App).
+This repository is a clone of [Corentin J's Real Time Voice Cloning repo](https://github.com/CorentinJ/Real-Time-Voice-Cloning) with [demo_cli.py](https://github.com/a-k-coder/ak-Real-Time-Voice-Cloning/demo_cli.py) modified to interface with the [Voice Cloner React Flask app](https://github.com/a-k-coder/Voice-Cloner-React-Flask-App). 
